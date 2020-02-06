@@ -49,7 +49,7 @@ void ListenerImpl::listenCallback(evconnlistener*, evutil_socket_t fd, sockaddr*
 
 void ListenerImpl::setupServerSocket(Event::DispatcherImpl& dispatcher, Socket& socket) {
   listener_.reset(
-      evconnlistener_new(&dispatcher.base(), listenCallback, this, 0, -1, socket.ioHandle().fd()));
+      evconnlistener_new(&dispatcher.base(), listenCallback, this, 0, 8096, socket.ioHandle().fd()));
 
   if (!listener_) {
     throw CreateListenerException(
